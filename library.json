@@ -1,0 +1,22 @@
+{
+  "name": "TinyADT",
+  "version": "1.0.1",
+  "description": "Advanced data types for micro-controllers",
+  "keywords": "timing",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/MyrtIO/tinyadt.git"
+  },
+  "authors":
+  [
+    {
+      "name": "Mikhael Khrustik",
+      "email": "misha@myrt.co",
+      "url": "https://myrt.co"
+    }
+  ],
+  "license": "MIT",
+  "frameworks": "Arduino",
+  "platforms": "*"
+}
