@@ -3,7 +3,7 @@
 
 int main() {
 	UNITY_BEGIN();
-	testVector();
+	testDeque();
 	testRingBuffer();
 	return UNITY_END();
 }

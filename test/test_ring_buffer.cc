@@ -1,5 +1,5 @@
 #include <unity.h>
-#include <TinyADT/RingBuffer.h>
+#include <TinyADT/ring_buffer.h>
 
 void test_RingBufferShouldWrite() {
     RingBuffer<2> buffer;

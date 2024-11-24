@@ -1,4 +1,4 @@
 #pragma once
 
-void testVector();
 void testRingBuffer();
+void testDeque();

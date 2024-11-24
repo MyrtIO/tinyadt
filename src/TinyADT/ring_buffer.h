@@ -2,6 +2,8 @@
 
 #ifdef ARDUINO
 #include <Arduino.h>
+#else
+#include <stdint.h>
 #endif
 
 template <size_t Size>
