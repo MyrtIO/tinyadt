@@ -106,7 +106,7 @@ public:
 	}
 
 	T& at(int index) override {
-		if (count_ <= 0 || index < 0 || index >= count_) {
+		if (count_ <= 0 || index < 0 || (unsigned)index >= count_) {
 			// Returns empty
 			return data_[Capacity];
 		}
@@ -118,15 +118,13 @@ public:
 	}
 
 	bool insert(int index, const T &item) override {
-		if (count_ >= Capacity) {
+		if (count_ >= Capacity || index < 0 || (unsigned)index > count_) {
 			return false;
 		}
-		if (index < count_) {
+		if ((unsigned)index < count_) {
 			for (int i = count_; i > index; i--) {
 				data_[i] = data_[i - 1];
 			}
-		} else if (index > count_) {
-			return false;
 		}
 		data_[index] = item;
 		count_ += 1;
@@ -159,7 +157,7 @@ public:
 	}
 
 	void clear() override {
-		for (int i = 0; i < count_; i++) {
+		for (uint16_t i = 0; i < count_; i++) {
 			data_[i] = T();
 		}
 		count_ = 0;
