@@ -5,3 +5,8 @@ test-uno:
 .PHONY: test-native
 test-native:
 	pio test -e native
+
+.PHONY: test
+test:
+	make test-native
+	make test-uno

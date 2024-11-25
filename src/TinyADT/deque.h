@@ -81,25 +81,25 @@ public:
 	};
 
 	// Storage
-	virtual uint16_t size();
-	virtual uint16_t capacity();
-	virtual void clear();
-	virtual T* data();
+	virtual uint16_t size() = 0;
+	virtual uint16_t capacity() = 0;
+	virtual void clear() = 0;
+	virtual T* data() = 0;
 	// Iterators
-	virtual iterator begin();
-	virtual iterator end();
+	virtual iterator begin() = 0;
+	virtual iterator end() = 0;
 	// Accessors
-	virtual T& at(int index);
-	virtual T& at_end(int index);
-	virtual T& operator[](int index);
+	virtual T& at(int index) = 0;
+	virtual T& at_end(int index) = 0;
+	virtual T& operator[](int index) = 0;
 	// Append
-	virtual bool push_front(const T &item);
-	virtual bool push_back(const T &item);
-	virtual T& emplace_back();
-	virtual T& emplace_front();
+	virtual bool push_front(const T &item) = 0;
+	virtual bool push_back(const T &item) = 0;
+	virtual T& emplace_back() = 0;
+	virtual T& emplace_front() = 0;
 	// Remove
-	virtual T& pop_front();
-	virtual T& pop_back();
+	virtual T& pop_front() = 0;
+	virtual T& pop_back() = 0;
 
 };
 
@@ -139,7 +139,7 @@ public:
 		return data_[(front_ + index) % Capacity];
 	}
 
-	T& at_end(int index) {
+	T& at_end(int index) override {
 		if (count_ <= 0 || index < 0 || index >= count_) {
 			// Returns empty
 			return data_[Capacity];

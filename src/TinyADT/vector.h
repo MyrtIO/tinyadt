@@ -71,22 +71,22 @@ public:
 	};
 
 	// Storage
-	virtual uint16_t size();
-	virtual uint16_t capacity();
-	virtual void clear();
-	virtual T* data();
+	virtual uint16_t size() = 0;
+	virtual uint16_t capacity() = 0;
+	virtual void clear() = 0;
+	virtual T* data() = 0;
 	// Iterators
-	virtual iterator begin();
-	virtual iterator end();
+	virtual iterator begin() = 0;
+	virtual iterator end() = 0;
 	// Accessors
-	virtual T& at(int index);
-	virtual T& operator[](int index);
+	virtual T& at(int index) = 0;
+	virtual T& operator[](int index) = 0;
 	// Append
-	virtual bool insert(int index, const T &item);
-	virtual bool push_back(const T &item);
-	virtual T& emplace_back();
+	virtual bool insert(int index, const T &item) = 0;
+	virtual bool push_back(const T &item) = 0;
+	virtual T& emplace_back() = 0;
 	// Remove
-	virtual T pop_back();
+	virtual T pop_back() = 0;
 };
 
 template <class T, uint16_t Capacity>
