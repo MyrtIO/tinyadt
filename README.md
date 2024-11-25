@@ -1,4 +1,4 @@
-# TinyADT
+# TinyADT [![Quality Assurance](https://github.com/MyrtIO/tinyadt/actions/workflows/qa.yaml/badge.svg)](https://github.com/MyrtIO/tinyadt/actions/workflows/qa.yaml)
 
 Advanced data types for micro-controllers. The primary objective is to enhance the ease of data management, while addressing the limitations of micro-controllers. The library aims for an interface similar to stdlib.
 
