@@ -1,5 +1,5 @@
-.PHONY: test-arduino
-test-arduino:
+.PHONY: test-uno
+test-uno:
 	pio test -e uno --without-uploading
 
 .PHONY: test-native

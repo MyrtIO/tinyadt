@@ -1,6 +1,5 @@
 #include <unity.h>
 #include <TinyADT/vector.h>
-#include <Arduino.h>
 
 void test_VectorShouldPushToBack() {
     StaticVector<int, 2> numbers;

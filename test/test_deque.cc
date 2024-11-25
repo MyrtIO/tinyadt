@@ -1,6 +1,5 @@
 #include <unity.h>
 #include <TinyADT/deque.h>
-#include <Arduino.h>
 
 void test_DequeShouldPushToBack() {
     StaticDeque<int, 2> deque;
