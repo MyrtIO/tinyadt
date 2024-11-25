@@ -263,7 +263,7 @@ public:
 		return data_;
 	}
 
-private:
+protected:
     uint16_t front_, back_, count_;
     T data_[Capacity + 1];
 };

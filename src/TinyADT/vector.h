@@ -175,7 +175,7 @@ public:
 		return typename Vector<T>::iterator(data_ + count_ - 1);
 	}
 
-private:
+protected:
 	T data_[Capacity];
 	uint16_t count_ = 0;
 };

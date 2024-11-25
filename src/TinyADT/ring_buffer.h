@@ -6,40 +6,40 @@
 #include <stdint.h>
 #endif
 
-template <size_t Size>
+template <size_t Capacity>
 #ifdef ARDUINO
 class RingBuffer : public Stream {
 #else
 class RingBuffer {
 #endif
 public:
-    RingBuffer() : head(0), tail(0), count(0) {}
+    RingBuffer() : head_(0), tail_(0), count_(0) {}
 
     size_t write(uint8_t item) {
         if (isFull()) {
             return 0;
         }
-        buffer[head] = item;
-        head = (head + 1) % Size;
-        count++;
+        buffer_[head_] = item;
+        head_ = (head_ + 1) % Capacity;
+        count_++;
         return 1;
     }
 
     int available() {
-        return count;
+        return count_;
     }
 
     int availableForWrite() {
-        return Size - count;
+        return Capacity - count_;
     }
 
     int read() {
         if (isEmpty()) {
             return -1;
         }
-        uint8_t item = buffer[tail];
-        tail = (tail + 1) % Size;
-        count--;
+        uint8_t item = buffer_[tail_];
+        tail_ = (tail_ + 1) % Capacity;
+        count_--;
         return item;
     }
 
@@ -47,31 +47,31 @@ public:
         if (isEmpty()) {
             return -1;
         }
-        return buffer[tail];
+        return buffer_[tail_];
     }
 
     bool isEmpty() const {
-        return count == 0;
+        return count_ == 0;
     }
 
     bool isFull() const {
-        return count == Size;
+        return count_ == Capacity;
     }
 
     size_t size() const {
-        return count;
+        return count_;
     }
 
     void clear() {
-        head = tail = count = 0;
+        head_ = tail_ = count_ = 0;
     }
 
 #ifdef ARDUINO
     void flush() {}
 #endif
-private:
-    uint8_t buffer[Size];
-    size_t head;
-    size_t tail;
-    size_t count;
+protected:
+    uint8_t buffer_[Capacity];
+    size_t head_;
+    size_t tail_;
+    size_t count_;
 };
