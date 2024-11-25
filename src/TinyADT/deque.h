@@ -76,8 +76,8 @@ public:
 		}
 
 	private:
-		int offset_ = 0;
 		Deque<T>* deque_;
+		int offset_ = 0;
 	};
 
 	// Storage
@@ -132,7 +132,7 @@ public:
 	}
 
 	T& at(int index) override {
-		if (count_ <= 0 || index < 0 || index >= count_) {
+		if (count_ <= 0 || index < 0 || (unsigned)index >= count_) {
 			// Returns empty
 			return data_[Capacity];
 		}
@@ -140,7 +140,7 @@ public:
 	}
 
 	T& at_end(int index) override {
-		if (count_ <= 0 || index < 0 || index >= count_) {
+		if (count_ <= 0 || index < 0 || (unsigned)index >= count_) {
 			// Returns empty
 			return data_[Capacity];
 		}
