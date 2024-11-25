@@ -79,6 +79,29 @@ void test_DequeShouldWriteDataContinuously() {
 	TEST_ASSERT_EQUAL(3, deque.pop_back());
 }
 
+void test_DequeShouldIterate() {
+	StaticDeque<int, 3> deque;
+
+	deque.push_back(0);
+	deque.push_back(1);
+	deque.push_back(2);
+
+	Deque<int>::iterator it;
+	uint8_t i;
+
+	// Forward
+	i = 0;
+	for (it = deque.begin(); it != deque.end(); ++it) {
+		TEST_ASSERT_EQUAL(i++, *it);
+	}
+
+	// Backward
+	i = 2;
+	for (it = deque.end(); it != deque.begin(); --it) {
+		TEST_ASSERT_EQUAL(i--, *it);
+	}
+}
+
 void testDeque() {
 	RUN_TEST(test_DequeShouldPushToBack);
 	RUN_TEST(test_DequeShouldPushToFront);
@@ -86,4 +109,5 @@ void testDeque() {
 	RUN_TEST(test_DequeShouldPopFront);
 	RUN_TEST(test_DequeShouldReportSize);
 	RUN_TEST(test_DequeShouldWriteDataContinuously);
+	RUN_TEST(test_DequeShouldIterate);
 }

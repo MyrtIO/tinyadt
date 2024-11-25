@@ -1,24 +1,106 @@
 #pragma once
 
 #include <stdint.h>
+#include "iterator.h"
 
 // Deque is a double ended queue.
 template <class T>
 class Deque {
 public:
+	class iterator {
+	public:
+		iterator() : deque_(nullptr), offset_(0) {}
+		iterator(Deque<T>* deque, int offset = 0) : deque_(deque), offset_(offset) {}
+
+		iterator& operator=(const iterator& rhs) {
+			offset_ = rhs.offset_;
+			deque_ = rhs.deque_;
+			return *this;
+		}
+
+		iterator& operator=(const int rhs) {
+			offset_ = rhs;
+			return *this;
+		}
+
+
+		T& operator*() {
+			return deque_->at(offset_);
+		}
+
+		bool operator==(const iterator& rhs) {
+			return offset_ == rhs.offset_ && deque_ == rhs.deque_;
+		}
+		bool operator!=(const iterator& rhs) {
+			return offset_ != rhs.offset_ || deque_ != rhs.deque_;
+		}
+
+		iterator& operator++() {
+			offset_ += 1;
+			return *this;
+		}
+		iterator operator++(int) {
+			iterator temp = *this;
+			offset_ += 1;
+			return temp;
+		}
+
+		iterator& operator--() {
+			offset_ -= 1;
+			return *this;
+		}
+		iterator operator--(int) {
+			iterator temp = *this;
+			offset_ -= 1;
+			return temp;
+		}
+
+		iterator& operator+=(const int rhs) {
+			offset_ += rhs;
+			return *this;
+		}
+		iterator operator+(const int rhs) {
+			iterator temp = *this;
+			temp += rhs;
+			return temp;
+		}
+
+		iterator& operator-=(const int rhs) {
+			offset_ -= rhs;
+			return *this;
+		}
+		iterator operator-(const int rhs) {
+			iterator temp = *this;
+			temp -= rhs;
+			return temp;
+		}
+
+	private:
+		int offset_ = 0;
+		Deque<T>* deque_;
+	};
+
+	// Storage
 	virtual uint16_t size();
 	virtual uint16_t capacity();
-	virtual T* begin();
-	virtual T* end();
+	virtual void clear();
+	virtual T* data();
+	// Iterators
+	virtual iterator begin();
+	virtual iterator end();
+	// Accessors
 	virtual T& at(int index);
+	virtual T& at_end(int index);
 	virtual T& operator[](int index);
+	// Append
 	virtual bool push_front(const T &item);
 	virtual bool push_back(const T &item);
-	virtual T& pop_front();
-	virtual T& pop_back();
 	virtual T& emplace_back();
 	virtual T& emplace_front();
-	virtual void clear();
+	// Remove
+	virtual T& pop_front();
+	virtual T& pop_back();
+
 };
 
 // StaticDeque is a double ended queue with a fixed capacity.
@@ -41,18 +123,12 @@ public:
 		return Capacity;
 	}
 
-    T* begin() override {
-		if (count_ == 0) {
-			return nullptr;
-		}
-		return &data_[front_];
+    typename Deque<T>::iterator begin() override {
+		return typename Deque<T>::iterator(this, 0);
 	}
 
-    T* end() override {
-		if (count_ == 0) {
-			return nullptr;
-		}
-		return &data_[back_ - 1];
+	typename Deque<T>::iterator end() override {
+		return typename Deque<T>::iterator(this, count_ - 1);
 	}
 
 	T& at(int index) override {
@@ -61,6 +137,14 @@ public:
 			return data_[Capacity];
 		}
 		return data_[(front_ + index) % Capacity];
+	}
+
+	T& at_end(int index) {
+		if (count_ <= 0 || index < 0 || index >= count_) {
+			// Returns empty
+			return data_[Capacity];
+		}
+		return data_[(back_ + index) % Capacity];
 	}
 
 	T& operator[](int index) override {
@@ -111,6 +195,7 @@ public:
 			back_ += 1;
 		}
 		count_ += 1;
+		data_[back_] = T();
 		return data_[back_];
 	}
 
@@ -124,6 +209,7 @@ public:
 			front_ -= 1;
 		}
 		count_ += 1;
+		data_[front_] = T();
 		return data_[front_];
 	}
 
@@ -159,6 +245,10 @@ public:
 
     void clear() override {
 		front_ = back_ = count_ = 0;
+	}
+
+	T* data() override {
+		return data_;
 	}
 
 private:
