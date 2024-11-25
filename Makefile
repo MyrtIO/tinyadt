@@ -10,3 +10,7 @@ test-native:
 test:
 	make test-native
 	make test-uno
+
+.PHONY: clean
+clean:
+	pio run --target clean
