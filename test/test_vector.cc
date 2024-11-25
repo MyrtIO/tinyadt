@@ -55,10 +55,7 @@ void test_VectorShouldIterate() {
 void test_VectorShouldClear() {
 	StaticVector<int, 3> numbers;
 
-	numbers.push_back(0);
-	numbers.push_back(1);
-	numbers.push_back(2);
-
+	numbers.push_back(0, 1, 2);
 	numbers.clear();
 
 	TEST_ASSERT_EQUAL(0, numbers.size());
@@ -67,9 +64,7 @@ void test_VectorShouldClear() {
 
 void test_VectorShouldSafeAccess() {
 	StaticVector<int, 2> numbers;
-
-	numbers.push_back(1);
-	numbers.push_back(3);
+	numbers.push_back(1, 3);
 
 	TEST_ASSERT_EQUAL(1, numbers.at(0));
 	TEST_ASSERT_EQUAL(3, numbers.at(1));

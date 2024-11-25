@@ -168,6 +168,12 @@ public:
 		return true;
 	}
 
+	template <typename... RestT>
+	bool push_front(const T &item, RestT... restItems) {
+		this->push_front(item);
+		return this->push_front(restItems...);
+	}
+
     bool push_back(const T &item) override {
 		if (count_ >= Capacity) {
 			return false;
@@ -183,6 +189,12 @@ public:
 		count_ += 1;
 
 		return true;
+	}
+
+	template <typename... RestT>
+	bool push_back(const T &item, RestT... restItems) {
+		this->push_back(item);
+		return this->push_back(restItems...);
 	}
 
 	T& emplace_back() override {

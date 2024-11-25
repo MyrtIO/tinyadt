@@ -27,8 +27,7 @@ void test_DequeShouldPushToFront() {
 void test_DequeShouldPopBack() {
 	StaticDeque<int, 2> deque;
 
-	deque.push_back(1);
-	deque.push_back(2);
+	deque.push_back(1, 2);
 
 	TEST_ASSERT_EQUAL(2, deque.pop_back());
 	TEST_ASSERT_EQUAL(1, deque.pop_back());
@@ -37,8 +36,7 @@ void test_DequeShouldPopBack() {
 void test_DequeShouldPopFront() {
 	StaticDeque<int, 2> deque;
 
-	deque.push_back(1);
-	deque.push_back(2);
+	deque.push_back(1, 2);
 
 	TEST_ASSERT_EQUAL(1, deque.pop_front());
 	TEST_ASSERT_EQUAL(2, deque.pop_front());
@@ -82,9 +80,7 @@ void test_DequeShouldWriteDataContinuously() {
 void test_DequeShouldIterate() {
 	StaticDeque<int, 3> deque;
 
-	deque.push_back(0);
-	deque.push_back(1);
-	deque.push_back(2);
+	deque.push_back(0, 1, 2);
 
 	Deque<int>::iterator it;
 	uint8_t i;

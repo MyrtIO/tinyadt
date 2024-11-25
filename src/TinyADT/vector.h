@@ -141,6 +141,12 @@ public:
 		return true;
 	}
 
+	template <typename... RestT>
+	bool push_back(const T &item, RestT... restItems) {
+		this->push_back(item);
+		return this->push_back(restItems...);
+	}
+
 	T& emplace_back() override {
 		return data_[count_++];
 	}
