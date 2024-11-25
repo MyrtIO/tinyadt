@@ -8,7 +8,7 @@ public:
 	class iterator {
 	public:
 		constexpr iterator() : pointer_(nullptr) {}
-		constexpr iterator(const T* pointer) : pointer_(pointer) {}
+		constexpr iterator(T* pointer) : pointer_(pointer) {}
 
 		iterator& operator=(const iterator& rhs) {
 			pointer_ = rhs.pointer_;
