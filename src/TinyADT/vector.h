@@ -176,6 +176,6 @@ public:
 	}
 
 protected:
-	T data_[Capacity];
+	T data_[Capacity + 1];
 	uint16_t count_ = 0;
 };
